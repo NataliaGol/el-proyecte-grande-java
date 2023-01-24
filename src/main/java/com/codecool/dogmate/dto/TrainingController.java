@@ -1,4 +1,4 @@
 package com.codecool.dogmate.dto;
 
-public class TrainningController {
+public class TrainingController {
 }

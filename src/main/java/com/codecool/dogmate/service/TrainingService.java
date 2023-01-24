@@ -1,4 +1,4 @@
 package com.codecool.dogmate.service;
 
-public class TrainningService {
+public class TrainingService {
 }

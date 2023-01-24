@@ -31,23 +31,26 @@ CREATE TABLE user_types
     name         VARCHAR(255) NOT NULL UNIQUE
 );
 
+INSERT INTO user_types(user_type_id, name) VALUES (1, 'USER');
+INSERT INTO user_types(user_type_id, name) VALUES (2, 'ADMIN');
+
 ------ USERS -----
 CREATE TABLE users
 (
     user_id                  SERIAL PRIMARY KEY,
-    user_name                VARCHAR(255) UNIQUE                          NOT NULL,
-    email                    VARCHAR(255) UNIQUE                          NOT NULL,
-    password                 VARCHAR(255)                                 NOT NULL,
+    user_name                VARCHAR(255) UNIQUE NOT NULL,
+    email                    VARCHAR(255) UNIQUE NOT NULL,
+    password                 VARCHAR(255)        NOT NULL,
     profile_picture_location VARCHAR,
     avatar_small_location    VARCHAR,
-    user_type_id             INTEGER REFERENCES user_types (user_type_id) NOT NULL,
+    user_type_id             INTEGER REFERENCES user_types (user_type_id) DEFAULT 1,
     city_id                  INTEGER REFERENCES cities (city_id),
     description              VARCHAR(255),
-    is_locked                BOOLEAN                  DEFAULT FALSE,
-    is_banned                BOOLEAN                  DEFAULT FALSE,
-    ban_expiration           TIMESTAMP WITH TIME ZONE DEFAULT NULL,
-    is_active                BOOLEAN                  DEFAULT TRUE,
-    created_at               TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    is_locked                BOOLEAN                                      DEFAULT FALSE,
+    is_banned                BOOLEAN                                      DEFAULT FALSE,
+    ban_expiration           TIMESTAMP WITH TIME ZONE                     DEFAULT NULL,
+    is_active                BOOLEAN                                      DEFAULT TRUE,
+    created_at               TIMESTAMP WITH TIME ZONE                     DEFAULT NOW()
 );
 CREATE INDEX idx_users_email ON users (email);
 CREATE INDEX idx_users_user_name ON users (user_name);
@@ -55,11 +58,11 @@ CREATE INDEX idx_users_user_name ON users (user_name);
 ------ LOGIN_ATTEMPTS -----
 CREATE TABLE login_attempts
 (
-    id         SERIAL PRIMARY KEY,
-    successful BOOLEAN,
-    ip         VARCHAR(39),
-    user_id    INTEGER REFERENCES users (user_id),
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+    login_attempt_id SERIAL PRIMARY KEY,
+    successful       BOOLEAN,
+    ip               VARCHAR(39),
+    user_id          INTEGER REFERENCES users (user_id),
+    created_at       TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 CREATE INDEX idx_login_attempts_user_id ON login_attempts (user_id);
 CREATE INDEX idx_login_attempts_ip ON login_attempts (ip);
