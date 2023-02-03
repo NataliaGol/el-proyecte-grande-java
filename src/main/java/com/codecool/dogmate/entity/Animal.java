@@ -2,8 +2,8 @@ package com.codecool.dogmate.entity;
 
 import com.codecool.dogmate.mapper.Gender;
 import com.codecool.dogmate.mapper.GenderConverter;
-import lombok.Getter;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -17,7 +17,6 @@ public class Animal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "animal_id")
     private Integer id;
 
     @Column(name = "name")
@@ -42,6 +41,7 @@ public class Animal {
     private String pictureLocation;
 
     @Column(name = "description")
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
 
     @Column(name = "is_male")
@@ -49,4 +49,3 @@ public class Animal {
     private Gender gender;
 
 }
-

@@ -1,6 +1,5 @@
 package com.codecool.dogmate.entity;
 
-import lombok.Getter;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LessonsAnimal {
+
     @EmbeddedId
     private LessonsAnimalId id;
 

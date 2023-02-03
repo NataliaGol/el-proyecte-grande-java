@@ -1,6 +1,5 @@
 package com.codecool.dogmate.entity;
 
-import lombok.Getter;
 import lombok.*;
 
 import javax.persistence.*;

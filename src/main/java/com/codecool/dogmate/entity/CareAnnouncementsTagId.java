@@ -1,6 +1,5 @@
 package com.codecool.dogmate.entity;
 
-import lombok.Getter;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -20,7 +19,7 @@ public class CareAnnouncementsTagId implements Serializable {
     @Column(name = "care_announcement_id")
     private Integer careAnnouncementId;
 
-    @Column(name = "tag_name", length = 50)
+    @Column(name = "tag_name")
     private String tagName;
 
     @Override

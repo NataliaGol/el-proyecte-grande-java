@@ -1,14 +1,8 @@
 package com.codecool.dogmate.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "voivodeship")
@@ -19,7 +13,7 @@ import javax.persistence.Table;
 public class Voivodeship {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "teryt_id")
@@ -27,5 +21,8 @@ public class Voivodeship {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "archive")
+    private Boolean archive = false;
 
 }

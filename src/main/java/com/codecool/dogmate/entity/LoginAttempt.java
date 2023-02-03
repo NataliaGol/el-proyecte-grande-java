@@ -1,6 +1,5 @@
 package com.codecool.dogmate.entity;
 
-import lombok.Getter;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,10 +18,8 @@ public class LoginAttempt {
     @Column(name = "login_attempt_id")
     private Integer id;
 
-    @Column(name = "successful")
     private Boolean successful;
 
-    @Column(name = "ip", length = 39)
     private String ip;
 
     @ManyToOne(fetch = FetchType.LAZY)

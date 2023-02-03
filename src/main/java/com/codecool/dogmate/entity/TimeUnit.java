@@ -1,6 +1,5 @@
 package com.codecool.dogmate.entity;
 
-import lombok.Getter;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +17,6 @@ public class TimeUnit {
     @Column(name = "time_unit_id")
     private Integer id;
 
-    @Column(name = "name", length = 10)
     private String name;
 
 }

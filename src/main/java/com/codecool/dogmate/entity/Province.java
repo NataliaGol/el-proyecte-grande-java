@@ -22,9 +22,9 @@ public class Province {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "voivodeship_id")
-    private Voivodeship voivodship;
+    private Voivodeship voivodeship;
 
     @Column(name = "archive")
     private Boolean archive = false;

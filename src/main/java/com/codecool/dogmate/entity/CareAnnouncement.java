@@ -1,6 +1,5 @@
 package com.codecool.dogmate.entity;
 
-import lombok.Getter;
 import lombok.*;
 
 import javax.persistence.*;
@@ -29,8 +28,7 @@ public class CareAnnouncement {
     @JoinColumn(name = "care_announcement_type_id")
     private CareAnnouncementType careAnnouncementType;
 
-    @Column(name = "title")
-    private String title;
+    private String name;
 
     @Column(name = "description")
     private String description;

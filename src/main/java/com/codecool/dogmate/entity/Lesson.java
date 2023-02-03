@@ -1,7 +1,7 @@
 package com.codecool.dogmate.entity;
 
-import lombok.Getter;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -20,14 +20,14 @@ public class Lesson {
     @Column(name = "lesson_id")
     private Integer id;
 
-    @Column(name = "lesson_name")
-    private String lessonName;
+    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "training_level_id")
     private TrainingLevel trainingLevel;
 
     @Column(name = "description")
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
 
     @Lob

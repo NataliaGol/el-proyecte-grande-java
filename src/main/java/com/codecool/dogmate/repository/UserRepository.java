@@ -14,7 +14,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO users (user_name, email, password) VALUES (:#{#user.userName}, :#{#user.email}, :#{#user.password})", nativeQuery = true)
+    @Query(value = "INSERT INTO users (user_name, email, password) VALUES (:#{#user.name}, :#{#user.email}, :#{#user.password})", nativeQuery = true)
     void registerUser(User user);
 
     List<User> findAllByIsActiveTrue();

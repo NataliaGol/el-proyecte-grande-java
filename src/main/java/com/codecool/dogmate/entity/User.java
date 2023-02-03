@@ -1,6 +1,7 @@
 package com.codecool.dogmate.entity;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
@@ -21,13 +22,13 @@ public class User {
     @Column(name = "user_id")
     private Integer id;
 
-    @Column(name = "user_name")
-    private String userName;
+    private String name;
 
     @Column(name = "email")
     private String email;
 
     @Column(name = "password")
+    @Type(type = "org.hibernate.type.TextType")
     private String password;
 
     @Lob
@@ -68,4 +69,3 @@ public class User {
     private Set<Animal> animals = new LinkedHashSet<>();
 
 }
-

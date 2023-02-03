@@ -1,7 +1,7 @@
 package com.codecool.dogmate.entity;
 
-import lombok.Getter;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -15,13 +15,13 @@ public class AnimalType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "animal_type_id")
     private Integer id;
 
     @Column(name = "name")
     private String name;
 
     @Column(name = "description")
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
 
 }
