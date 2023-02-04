@@ -1,6 +1,6 @@
 package com.codecool.dogmate.mapper;
 
-import com.codecool.dogmate.dto.UserRequest;
+import com.codecool.dogmate.dto.RegisterRequest;
 import com.codecool.dogmate.dto.UserResponse;
 import com.codecool.dogmate.entity.User;
 import org.mapstruct.IterableMapping;
@@ -20,13 +20,13 @@ public abstract class UserMapper {
 
     @Named("toEntity")
     @Mapping(target = "password", expression = "java(passwordEncoder.encode(dto.getPassword()))")
-    public abstract User toEntity(UserRequest dto);
+    public abstract User toEntity(RegisterRequest dto);
 
     @Named("toResponse")
     public abstract UserResponse toResponse(User entity);
 
     @IterableMapping(qualifiedByName = "toEntity")
-    public abstract Collection<User> toEntity(Collection<UserRequest> dto);
+    public abstract Collection<User> toEntity(Collection<RegisterRequest> dto);
 
     @IterableMapping(qualifiedByName = "toResponse")
     public abstract Collection<UserResponse> toResponse(Collection<User> entity);

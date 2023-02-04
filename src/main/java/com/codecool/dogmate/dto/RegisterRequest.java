@@ -7,10 +7,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserResponse {
+public class RegisterRequest {
 
-    private Integer id;
     private String name;
     private String email;
+    private String password;
 
 }
