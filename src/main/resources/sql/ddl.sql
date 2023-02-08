@@ -38,7 +38,7 @@ create table breeds
     id           serial primary key,
     name         varchar(55)           not null,
     archive      boolean default false not null,
-    animal_types integer
+    animal_types_is integer
         constraint breeds_animal_types_id_fk references animal_types
 );
 
@@ -174,7 +174,7 @@ create table animals
 (
     id               serial primary key,
     name             varchar(50) not null,
-    animal_type_id   integer references animal_types,
+    animal_type_id   integer not null references animal_types (id),
     breed_id         integer references breeds,
     user_id          integer references users,
     birth_year       integer     not null,

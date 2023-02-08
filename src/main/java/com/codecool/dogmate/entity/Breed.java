@@ -21,7 +21,7 @@ public class Breed {
     private Boolean archive = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "animal_types")
+    @JoinColumn(name = "animal_types_id")
     private AnimalType animalTypes;
 
 }
