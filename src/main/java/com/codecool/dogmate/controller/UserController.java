@@ -37,4 +37,9 @@ public class UserController {
         return userService.loginUser(response, dto);
     }
 
+    @PostMapping("/logout")
+    public void logout(HttpServletResponse response) {
+        userService.logout(response);
+    }
+
 }
