@@ -57,4 +57,10 @@ public class UserService {
         return userMapper.toResponse(user);
     }
 
+    public void logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("user", "");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+    }
+
 }
