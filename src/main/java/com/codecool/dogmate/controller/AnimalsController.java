@@ -1,6 +1,6 @@
 package com.codecool.dogmate.controller;
 
-import com.codecool.dogmate.dto.AnimalDto;
+import com.codecool.dogmate.dto.animal.AnimalDto;
 import com.codecool.dogmate.service.AnimalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

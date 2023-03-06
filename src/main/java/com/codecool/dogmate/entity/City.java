@@ -3,6 +3,7 @@ package com.codecool.dogmate.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.TimeZone;
 
 @Entity
 @Table(name = "cities")
@@ -26,4 +27,20 @@ public class City {
     @Column(name = "archive")
     private Boolean archive = false;
 
+    @Version
+    private Integer version;
+
+    @Column(name = "date_create")
+    private TimeZone date_create ;
+
+    @Column(name = "date_modify")
+    private TimeZone date_modify ;
+
+    @Column(name = "date_archive")
+    private TimeZone date_archive ;
+
+    public City(String name, Province province) {
+        this.name = name;
+        this.province = province;
+    }
 }

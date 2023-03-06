@@ -1,6 +1,6 @@
 package com.codecool.dogmate.repository;
 
-import com.codecool.dogmate.dto.AnimalDto;
+import com.codecool.dogmate.dto.animal.AnimalDto;
 import com.codecool.dogmate.entity.Animal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

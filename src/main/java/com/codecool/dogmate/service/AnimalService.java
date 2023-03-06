@@ -1,6 +1,6 @@
 package com.codecool.dogmate.service;
 
-import com.codecool.dogmate.dto.AnimalDto;
+import com.codecool.dogmate.dto.animal.AnimalDto;
 import com.codecool.dogmate.mapper.AnimalMapper;
 import com.codecool.dogmate.repository.AnimalRepository;
 import org.springframework.stereotype.Service;

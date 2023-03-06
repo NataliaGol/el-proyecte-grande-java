@@ -1,6 +1,6 @@
 package com.codecool.dogmate.mapper;
 
-import com.codecool.dogmate.dto.AnimalDto;
+import com.codecool.dogmate.dto.animal.AnimalDto;
 import com.codecool.dogmate.entity.Animal;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
