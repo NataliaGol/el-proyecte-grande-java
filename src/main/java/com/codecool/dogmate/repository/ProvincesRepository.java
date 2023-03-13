@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface ProvincesRepository extends JpaRepository<Province, Integer> {
 
-    @Query("SELECT DISTINCT d FROM Province d LEFT JOIN FETCH d.voivodeship.name")
+    @Query("SELECT DISTINCT d FROM Province d LEFT JOIN FETCH d.voivodeship")
     List<Province> findAllBy();
 }
