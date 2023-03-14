@@ -63,4 +63,7 @@ public class UserService {
         response.addCookie(cookie);
     }
 
+    public void addNewUser(RegisterRequest dto) {
+        //ToDo!!!
+    }
 }

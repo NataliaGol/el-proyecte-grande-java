@@ -32,6 +32,12 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PostMapping
+    public ResponseEntity<HttpStatus> addNewUser(@RequestBody RegisterRequest dto) {
+        userService.addNewUser(dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
     @PostMapping("/login")
     public UserResponse login(HttpServletResponse response, @RequestBody LoginRequest dto) {
         return userService.loginUser(response, dto);
