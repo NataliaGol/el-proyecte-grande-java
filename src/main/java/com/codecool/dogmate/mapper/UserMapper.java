@@ -3,32 +3,74 @@ package com.codecool.dogmate.mapper;
 import com.codecool.dogmate.dto.RegisterRequest;
 import com.codecool.dogmate.dto.UserResponse;
 import com.codecool.dogmate.entity.User;
-import org.mapstruct.IterableMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
-@Mapper(componentModel = "spring") // @Component is added to generated class
-public abstract class UserMapper {
+@Component
+public class UserMapper {
+
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    protected PasswordEncoder passwordEncoder;
+    public UserMapper(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
-    @Named("toEntity")
-    @Mapping(target = "password", expression = "java(passwordEncoder.encode(dto.getPassword()))")
-    public abstract User toEntity(RegisterRequest dto);
+    public User toEntity(RegisterRequest dto) {
+        if (dto == null) {
+            return null;
+        }
 
-    @Named("toResponse")
-    public abstract UserResponse toResponse(User entity);
+        User.UserBuilder user = User.builder();
 
-    @IterableMapping(qualifiedByName = "toEntity")
-    public abstract Collection<User> toEntity(Collection<RegisterRequest> dto);
+        user.name(dto.getName());
+        user.email(dto.getEmail());
+        user.password(passwordEncoder.encode(dto.getPassword()));
 
-    @IterableMapping(qualifiedByName = "toResponse")
-    public abstract Collection<UserResponse> toResponse(Collection<User> entity);
+        return user.build();
+    }
 
+    public UserResponse toResponse(User entity) {
+        if (entity == null) {
+            return null;
+        }
+
+        UserResponse.UserResponseBuilder userResponse = UserResponse.builder();
+
+        userResponse.id(entity.getId());
+        userResponse.name(entity.getName());
+        userResponse.email(entity.getEmail());
+
+        return userResponse.build();
+    }
+
+    public Collection<User> toEntity(Collection<RegisterRequest> dto) {
+        if (dto == null) {
+            return null;
+        }
+
+        Collection<User> collection = new ArrayList<>(dto.size());
+        for (RegisterRequest registerRequest : dto) {
+            collection.add(toEntity(registerRequest));
+        }
+
+        return collection;
+    }
+
+    public Collection<UserResponse> toResponse(Collection<User> entity) {
+        if (entity == null) {
+            return null;
+        }
+
+        Collection<UserResponse> collection = new ArrayList<>(entity.size());
+        for (User user : entity) {
+            collection.add(toResponse(user));
+        }
+
+        return collection;
+    }
 }
