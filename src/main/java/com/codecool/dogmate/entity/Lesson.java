@@ -32,7 +32,6 @@ public class Lesson {
     @Type(type = "org.hibernate.type.TextType")
     private String description;
 
-    @Lob
     @Column(name = "image_location")
     private String imageLocation;
 

@@ -23,7 +23,7 @@ public class LessonsController {
     }
 
     @GetMapping("/{id}")
-    public LessonDto getLessonByCityId(@PathVariable Integer id) {
+    public LessonDto getLessonByLessonId(@PathVariable Integer id) {
         return lessonsService.getLessonById(id);
     }
 
