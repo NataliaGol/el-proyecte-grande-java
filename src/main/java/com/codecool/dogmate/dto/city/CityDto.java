@@ -1,13 +1,14 @@
 package com.codecool.dogmate.dto.city;
 
-import java.util.TimeZone;
+import java.time.LocalDateTime;
 
 public record CityDto(
         Integer id,
         String name,
-        TimeZone date_create,
-        TimeZone date_modify,
-        TimeZone date_archive,
-        Boolean archive
+        LocalDateTime date_create,
+        LocalDateTime date_modify,
+        LocalDateTime date_archive,
+        Boolean archive,
+        Integer province
 ) {
 }

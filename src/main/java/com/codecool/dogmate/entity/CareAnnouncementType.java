@@ -10,14 +10,18 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class CareAnnouncementType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "care_announcement_type_id")
     private Integer id;
 
-    @Column(name = "name")
+    @EqualsAndHashCode.Include
+    @Column(name = "name", unique = true)
     private String name;
 
+    public CareAnnouncementType(String name) {
+        this.name = name;
+    }
 }

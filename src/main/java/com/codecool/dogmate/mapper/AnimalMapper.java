@@ -1,32 +1,45 @@
 package com.codecool.dogmate.mapper;
 
 import com.codecool.dogmate.dto.animal.AnimalDto;
+import com.codecool.dogmate.dto.animal.NewAnimalDto;
 import com.codecool.dogmate.entity.Animal;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import com.codecool.dogmate.entity.AnimalType;
+import com.codecool.dogmate.entity.Breed;
+import com.codecool.dogmate.entity.User;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+@Component
+public class AnimalMapper {
 
-@Mapper(componentModel = "spring")
-public interface AnimalMapper {
 
-    @Mapping(source = "animalTypeId", target = "animalType.id")
-    @Mapping(source = "breedId", target = "breed.id")
-    @Mapping(source = "userId", target = "user.id")
-    @Mapping(target = "gender", expression = "java(dto.getIsMale() ? Gender.MALE : Gender.FEMALE)")
-    Animal toEntity(AnimalDto dto);
-
-    @Mapping(source = "animalType.id", target = "animalTypeId")
-    @Mapping(source = "breed.id", target = "breedId")
-    @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "gender.male", target = "isMale")
-    AnimalDto toDto(Animal entity);
-
-    default List<AnimalDto> toDto(List<Animal> entities) {
-        return entities
-                .stream()
-                .map(this::toDto)
-                .toList();
+    public Animal mapNewAniamlDtoToEntity(NewAnimalDto dto, AnimalType animalType, Breed breed, User user) {
+        return new Animal(
+                dto.name(),
+                animalType,
+                breed,
+                user,
+                dto.birthYear(),
+                dto.pictureLocation(),
+                dto.description(),
+                dto.gender()
+        );
     }
 
+    public AnimalDto mapEntityToAnimalDto(Animal entity) {
+        return new AnimalDto(
+                entity.getId(),
+                entity.getName(),
+                entity.getAnimalType().getId(),
+                entity.getBreed().getId(),
+                entity.getUser().getId(),
+                entity.getBirthYear(),
+                entity.getPictureLocation(),
+                entity.getDescription(),
+                entity.getGender(),
+                entity.getDate_create(),
+                entity.getDate_modify(),
+                entity.getDate_archive(),
+                entity.getArchive()
+        );
+    }
 }

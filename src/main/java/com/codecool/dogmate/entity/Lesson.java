@@ -13,13 +13,15 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Lesson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "lesson_id")
     private Integer id;
 
+    @EqualsAndHashCode.Include
+    @Column(name = "name", unique = true)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -37,4 +39,10 @@ public class Lesson {
     @OneToMany(mappedBy = "lesson")
     private Set<LessonStep> lessonSteps = new LinkedHashSet<>();
 
+    public Lesson(String name, TrainingLevel trainingLevel, String description, String imageLocation) {
+        this.name = name;
+        this.trainingLevel = trainingLevel;
+        this.description = description;
+        this.imageLocation = imageLocation;
+    }
 }

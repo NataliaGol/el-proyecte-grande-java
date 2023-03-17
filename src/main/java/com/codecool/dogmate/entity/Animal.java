@@ -1,11 +1,11 @@
 package com.codecool.dogmate.entity;
 
 import com.codecool.dogmate.mapper.Gender;
-import com.codecool.dogmate.mapper.GenderConverter;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "animals")
@@ -44,8 +44,33 @@ public class Animal {
     @Type(type = "org.hibernate.type.TextType")
     private String description;
 
-    @Column(name = "is_male")
-    @Convert(converter = GenderConverter.class)
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Column(name = "archive")
+    private Boolean archive = false;
+
+    @Version
+    private Integer version;
+
+    @Column(name = "date_create")
+    private LocalDateTime date_create = LocalDateTime.now();
+
+    @Column(name = "date_modify")
+    private LocalDateTime date_modify ;
+
+    @Column(name = "date_archive")
+    private LocalDateTime date_archive ;
+
+    public Animal(String name, AnimalType animalType, Breed breed, User user, Integer birthYear, String pictureLocation, String description, Gender gender) {
+        this.name = name;
+        this.animalType = animalType;
+        this.breed = breed;
+        this.user = user;
+        this.birthYear = birthYear;
+        this.pictureLocation = pictureLocation;
+        this.description = description;
+        this.gender = gender;
+    }
 }

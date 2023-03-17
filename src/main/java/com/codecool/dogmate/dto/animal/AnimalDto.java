@@ -1,18 +1,23 @@
 package com.codecool.dogmate.dto.animal;
 
-import lombok.Data;
+import com.codecool.dogmate.mapper.Gender;
 
-@Data
-public class AnimalDto {
+import java.time.LocalDateTime;
 
-    private Integer id;
-    private String name;
-    private Integer animalTypeId;
-    private Integer breedId;
-    private Integer userId;
-    private Integer birthYear;
-    private String pictureLocation;
-    private String description;
-    private Boolean isMale;
+public record AnimalDto (
 
+    Integer id,
+    String name,
+    Integer animalTypesId,
+    Integer breedId,
+    Integer userId,
+    Integer birthYear,
+    String pictureLocation,
+    String description,
+    Gender gender,
+    LocalDateTime date_create,
+    LocalDateTime date_modify,
+    LocalDateTime date_archive,
+    Boolean archive
+){
 }

@@ -1,4 +1,13 @@
 package com.codecool.dogmate.dto.animaltype;
 
-public record AnimalTypeDto(){
+import com.codecool.dogmate.dto.breed.BreedDto;
+
+import java.util.List;
+
+public record AnimalTypeDto(
+        Integer id,
+        String name,
+        String description,
+        List<BreedDto>breeds
+) {
 }

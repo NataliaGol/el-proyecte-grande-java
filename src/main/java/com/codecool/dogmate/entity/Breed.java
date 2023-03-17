@@ -10,12 +10,15 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Breed {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @EqualsAndHashCode.Include
+    @Column(name = "name", unique = true)
     private String name;
 
     private Boolean archive = false;
@@ -24,4 +27,7 @@ public class Breed {
     @JoinColumn(name = "animal_types_id")
     private AnimalType animalTypes;
 
+    public Breed(String name) {
+        this.name = name;
+    }
 }

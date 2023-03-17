@@ -10,13 +10,17 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TimeUnit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "time_unit_id")
     private Integer id;
-
+    @EqualsAndHashCode.Include
+    @Column(name = "name", unique = true)
     private String name;
 
+    public TimeUnit(String name) {
+        this.name = name;
+    }
 }

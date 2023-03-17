@@ -1,32 +1,39 @@
 package com.codecool.dogmate.controller;
 
 import com.codecool.dogmate.dto.animal.AnimalDto;
-import com.codecool.dogmate.service.AnimalService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.codecool.dogmate.dto.animal.NewAnimalDto;
+import com.codecool.dogmate.dto.breed.BreedDto;
+import com.codecool.dogmate.service.AnimalsService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/animals")
+@RequestMapping("/api/animals")
 public class AnimalsController {
 
-    private final AnimalService animalService;
+    private final AnimalsService animalsService;
 
-    public AnimalsController(AnimalService animalService) {
-        this.animalService = animalService;
+    public AnimalsController(AnimalsService animalsService) {
+        this.animalsService = animalsService;
     }
 
     @GetMapping
-    List<AnimalDto> getAllDogs() {
-        return animalService.findAllDogs();
+    public List<AnimalDto> getAllAnimals() {return animalsService.getAnimals();}
+    @GetMapping(params = {"page", "size", "sort"})
+    public List<AnimalDto> getAllAnimalsWithPageable(Pageable pageable) {
+        return animalsService.getAnimals(pageable);
+    }
+
+    @GetMapping("/{id}")
+    public AnimalDto getAnimalByAniamalId(@PathVariable Integer id) {
+        return animalsService.getAnimalById(id);
     }
 
     @PostMapping
-    ResponseEntity<HttpStatus> addDog(@RequestBody AnimalDto dto) {
-        animalService.addDog(dto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public AnimalDto newAnimal(@RequestBody NewAnimalDto animal) {
+        return animalsService.createAnimal(animal);
     }
-
 }
+

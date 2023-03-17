@@ -15,7 +15,6 @@ public class LessonStep {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "lesson_step_id")
     private Integer id;
 
     private String name;

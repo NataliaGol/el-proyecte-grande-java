@@ -3,6 +3,7 @@ package com.codecool.dogmate.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TimeZone;
@@ -13,13 +14,16 @@ import java.util.TimeZone;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Province {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "teryt_id")
+
+    @EqualsAndHashCode.Include
+    @Column(name = "teryt_id", unique = true)
     private String terytId;
 
     @Column(name = "name")
@@ -36,22 +40,19 @@ public class Province {
     private Integer version;
 
     @Column(name = "date_create")
-    private TimeZone date_create ;
+    private LocalDateTime date_create = LocalDateTime.now();;
 
     @Column(name = "date_modify")
-    private TimeZone date_modify ;
+    private LocalDateTime date_modify ;
 
     @Column(name = "date_archive")
-    private TimeZone date_archive ;
+    private LocalDateTime date_archive ;
 
     @OneToMany(mappedBy = "province", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private Set<City> cities = new HashSet<>();
 
-    public Province(String name, String terytId, Voivodeship voivodshipId) {
+    public Province(String name, String terytId) {
         this.name = name;
         this.terytId = terytId;
-        this.voivodeship = voivodshipId;
     }
-
-
 }

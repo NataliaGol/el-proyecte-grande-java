@@ -12,14 +12,15 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TrainingLevel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "training_level_id")
     private Integer id;
 
-    @Column(name = "name")
+    @EqualsAndHashCode.Include
+    @Column(name = "name", unique = true)
     private String name;
 
     @Column(name = "description")
@@ -28,4 +29,8 @@ public class TrainingLevel {
     @OneToMany(mappedBy = "trainingLevel")
     private Set<Lesson> lessons = new LinkedHashSet<>();
 
+    public TrainingLevel(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 }
