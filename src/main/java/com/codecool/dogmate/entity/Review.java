@@ -22,8 +22,8 @@ public class Review {
     private CareAnnouncement careAnnouncement;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "appuser_id")
+    private AppUser appUser;
 
     @Column(name = "description")
     private String description;

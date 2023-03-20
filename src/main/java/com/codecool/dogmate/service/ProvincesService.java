@@ -4,12 +4,13 @@ import com.codecool.dogmate.dto.province.NewProvinceDto;
 import com.codecool.dogmate.dto.province.ProvinceDto;
 import com.codecool.dogmate.entity.Province;
 import com.codecool.dogmate.entity.Voivodeship;
-import com.codecool.dogmate.excpetion.ProvinceNotFoudException;
 import com.codecool.dogmate.mapper.ProvinceMapper;
 import com.codecool.dogmate.repository.ProvinceRepository;
 import com.codecool.dogmate.repository.VoivodeshipRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -41,12 +42,13 @@ public class ProvincesService {
     public ProvinceDto getProvinceById(Integer id) {
         return provinceRepository.findOneById(id)
                 .map(provinceMapper::mapEntityToProvinceDto)
-                .orElseThrow(() -> new ProvinceNotFoudException(id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public ProvinceDto createProvince(NewProvinceDto province) {
         Province entity = provinceMapper.mapNewProvinceDtoToEntity(province);
-        Voivodeship voivodeship = voivodeshipRepository.findOneById(province.voivodeship()).get();
+        Voivodeship voivodeship = voivodeshipRepository.findOneById(province.voivodeship())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         entity.setVoivodeship(voivodeship);
         voivodeship.getProvinces().add(entity);
         Province savedEntity = provinceRepository.save(entity);

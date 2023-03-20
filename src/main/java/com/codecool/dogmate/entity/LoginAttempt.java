@@ -23,8 +23,8 @@ public class LoginAttempt {
     private String ip;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "appuser_id")
+    private AppUser appUser;
 
     @Column(name = "created_at")
     private OffsetDateTime createdAt;

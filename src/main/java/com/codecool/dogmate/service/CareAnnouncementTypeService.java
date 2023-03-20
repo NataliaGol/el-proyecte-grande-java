@@ -3,12 +3,12 @@ package com.codecool.dogmate.service;
 import com.codecool.dogmate.dto.careannouncmenttype.CareAnnouncementTypeDto;
 import com.codecool.dogmate.dto.careannouncmenttype.NewCareAnnouncementTypeDto;
 import com.codecool.dogmate.entity.CareAnnouncementType;
-import com.codecool.dogmate.excpetion.CareAnnouncementTypeNotFoudException;
-import com.codecool.dogmate.excpetion.TimeUnitNotFoudException;
 import com.codecool.dogmate.mapper.CareAnnouncementTypeMapper;
 import com.codecool.dogmate.repository.CareAnnouncementTypeRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class CareAnnouncementTypeService {
     public CareAnnouncementTypeDto getCareAnnouncementTypeById(Integer id) {
         return careAnnouncementTypeRepository.findOneById(id)
                 .map(careAnnouncementTypeMapper::mapEntityToCareAnnouncementTypeDto)
-                .orElseThrow(() -> new CareAnnouncementTypeNotFoudException(id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public CareAnnouncementTypeDto createCareAnnouncementType(NewCareAnnouncementTypeDto careannouncementtype) {

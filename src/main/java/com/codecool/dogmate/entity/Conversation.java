@@ -21,11 +21,11 @@ public class Conversation {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "original_sender_id")
-    private User originalSender;
+    private AppUser originalSender;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "original_receiver_id")
-    private User originalReceiver;
+    private AppUser originalReceiver;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "care_announcement_id")

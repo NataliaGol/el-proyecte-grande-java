@@ -5,19 +5,19 @@ import com.codecool.dogmate.dto.animal.NewAnimalDto;
 import com.codecool.dogmate.entity.Animal;
 import com.codecool.dogmate.entity.AnimalType;
 import com.codecool.dogmate.entity.Breed;
-import com.codecool.dogmate.entity.User;
+import com.codecool.dogmate.entity.AppUser;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AnimalMapper {
 
 
-    public Animal mapNewAniamlDtoToEntity(NewAnimalDto dto, AnimalType animalType, Breed breed, User user) {
+    public Animal mapNewAniamlDtoToEntity(NewAnimalDto dto, AnimalType animalType, Breed breed, AppUser appUser) {
         return new Animal(
                 dto.name(),
                 animalType,
                 breed,
-                user,
+                appUser,
                 dto.birthYear(),
                 dto.pictureLocation(),
                 dto.description(),
@@ -31,7 +31,7 @@ public class AnimalMapper {
                 entity.getName(),
                 entity.getAnimalType().getId(),
                 entity.getBreed().getId(),
-                entity.getUser().getId(),
+                entity.getAppUser().getId(),
                 entity.getBirthYear(),
                 entity.getPictureLocation(),
                 entity.getDescription(),

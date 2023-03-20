@@ -149,7 +149,7 @@ create index idx_login_attempts_ip on login_attempts (ip);
 create index idx_login_attempts_created_at on login_attempts (created_at);
 create index idx_login_attempts_successful on login_attempts (successful);
 
------- lock user account after 3 failed attempts ------
+------ lock appUser account after 3 failed attempts ------
 CREATE OR REPLACE FUNCTION lock_account_on_failed_attempts() RETURNS TRIGGER AS
 $$
 BEGIN

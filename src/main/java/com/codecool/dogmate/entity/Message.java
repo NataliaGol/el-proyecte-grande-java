@@ -27,11 +27,11 @@ public class Message {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sender_id")
-    private User sender;
+    private AppUser sender;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver_id")
-    private User receiver;
+    private AppUser receiver;
 
     @Column(name = "message_content")
     private String messageContent;

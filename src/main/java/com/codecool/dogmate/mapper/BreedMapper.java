@@ -16,8 +16,11 @@ public class BreedMapper {
         return new BreedDto(
                 entity.getId(),
                 entity.getName(),
-                entity.getArchive(),
-                entity.getAnimalTypes().getId()
+                entity.getAnimalTypes().getId(),
+                entity.getDate_create(),
+                entity.getDate_archive(),
+                entity.getDate_modify(),
+                entity.getArchive()
         );
     }
 }

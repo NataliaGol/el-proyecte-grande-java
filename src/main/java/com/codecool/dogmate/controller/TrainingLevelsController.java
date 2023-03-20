@@ -1,7 +1,7 @@
 package com.codecool.dogmate.controller;
 
-import com.codecool.dogmate.dto.traininglevels.NewTrainingLevelDto;
-import com.codecool.dogmate.dto.traininglevels.TrainingLevelDto;
+import com.codecool.dogmate.dto.traininglevel.NewTrainingLevelDto;
+import com.codecool.dogmate.dto.traininglevel.TrainingLevelDto;
 import com.codecool.dogmate.service.TrainingLevelsService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;

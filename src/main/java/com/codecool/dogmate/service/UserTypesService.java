@@ -3,11 +3,12 @@ package com.codecool.dogmate.service;
 import com.codecool.dogmate.dto.usertype.NewUserTypeDto;
 import com.codecool.dogmate.dto.usertype.UserTypeDto;
 import com.codecool.dogmate.entity.UserType;
-import com.codecool.dogmate.excpetion.UserTypeNotFoudException;
 import com.codecool.dogmate.mapper.UserTypeMapper;
 import com.codecool.dogmate.repository.*;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class UserTypesService {
     public UserTypeDto getUserTypeById(Integer id) {
         return userTypeRepository.findOneById(id)
                 .map(userTypeMapper::mapEntityToUserTypeDto)
-                .orElseThrow(() -> new UserTypeNotFoudException(id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public UserTypeDto createUserType(NewUserTypeDto usertype) {

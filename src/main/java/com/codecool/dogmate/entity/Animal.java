@@ -31,8 +31,8 @@ public class Animal {
     private Breed breed;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "appuser_id")
+    private AppUser appUser;
 
     @Column(name = "birth_year")
     private Integer birthYear;
@@ -63,11 +63,11 @@ public class Animal {
     @Column(name = "date_archive")
     private LocalDateTime date_archive ;
 
-    public Animal(String name, AnimalType animalType, Breed breed, User user, Integer birthYear, String pictureLocation, String description, Gender gender) {
+    public Animal(String name, AnimalType animalType, Breed breed, AppUser appUser, Integer birthYear, String pictureLocation, String description, Gender gender) {
         this.name = name;
         this.animalType = animalType;
         this.breed = breed;
-        this.user = user;
+        this.appUser = appUser;
         this.birthYear = birthYear;
         this.pictureLocation = pictureLocation;
         this.description = description;

@@ -4,25 +4,28 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "appusers")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
     private Integer id;
 
-    private String name;
+    @Column(name = "first_name")
+    private String first_name;
+    @Column(name = "last_name")
+    private String last_name;
 
     @Column(name = "email")
     private String email;
@@ -51,21 +54,40 @@ public class User {
     private String description;
 
     @Column(name = "is_locked")
-    private Boolean isLocked;
+    private Boolean isLocked = false;
 
     @Column(name = "is_banned")
-    private Boolean isBanned;
+    private Boolean isBanned = false;
 
     @Column(name = "ban_expiration")
     private OffsetDateTime banExpiration;
 
     @Column(name = "is_active")
-    private Boolean isActive;
+    private Boolean isActive = true ;
 
-    @Column(name = "created_at")
-    private OffsetDateTime createdAt;
 
-    @OneToMany(mappedBy = "user")
+    @Column(name = "archive")
+    private Boolean archive = false;
+
+    @Version
+    private Integer version;
+
+    @Column(name = "date_create")
+    private LocalDateTime date_create = LocalDateTime.now();
+
+    @Column(name = "date_modify")
+    private LocalDateTime date_modify ;
+
+    @Column(name = "date_archive")
+    private LocalDateTime date_archive ;
+
+    @OneToMany(mappedBy = "appUser")
     private Set<Animal> animals = new LinkedHashSet<>();
 
+    public AppUser(String first_name, String last_name, String email, String password) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.password = password;
+    }
 }

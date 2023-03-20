@@ -24,7 +24,7 @@ public class UserType {
     private String name;
 
     @OneToMany(mappedBy = "userType", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    private Set<User> users = new HashSet<>();
+    private Set<AppUser> appUsers = new HashSet<>();
 
     public UserType(String name) {
         this.name = name;

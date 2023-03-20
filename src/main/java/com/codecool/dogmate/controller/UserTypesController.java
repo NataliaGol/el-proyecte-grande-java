@@ -1,7 +1,11 @@
 package com.codecool.dogmate.controller;
 
+import com.codecool.dogmate.dto.animal.AnimalDto;
+import com.codecool.dogmate.dto.appuser.AppUserDto;
 import com.codecool.dogmate.dto.usertype.NewUserTypeDto;
 import com.codecool.dogmate.dto.usertype.UserTypeDto;
+import com.codecool.dogmate.dto.voivodeship.NewVoivodeshipDto;
+import com.codecool.dogmate.dto.voivodeship.VoivodeshipDto;
 import com.codecool.dogmate.service.UserTypesService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +24,8 @@ public class UserTypesController {
 
 
     @GetMapping
-    public List<UserTypeDto> getAllUserType() {return userTypesService.getUserTypes();}
+    public List<UserTypeDto> getAllUserTypes() {return userTypesService.getUserTypes();}
+
 
     @GetMapping(params = {"page", "size", "sort"})
     public List<UserTypeDto> getAllUserTypesWithPageable(Pageable pageable) {
@@ -28,13 +33,17 @@ public class UserTypesController {
     }
 
     @GetMapping("/{id}")
-    public UserTypeDto getUserTypeByUserTypeId(@PathVariable Integer id) {
+    public UserTypeDto getAppUserTypeByUserTypeId(@PathVariable Integer id) {
         return userTypesService.getUserTypeById(id);
     }
 
     @PostMapping
-    public UserTypeDto newUserType(@RequestBody NewUserTypeDto usertype) {
-        return userTypesService.createUserType(usertype);
+    public UserTypeDto newUserType(@RequestBody NewUserTypeDto userTypeDto) {
+        return userTypesService.createUserType(userTypeDto);
     }
+
+
+
+
 }
 

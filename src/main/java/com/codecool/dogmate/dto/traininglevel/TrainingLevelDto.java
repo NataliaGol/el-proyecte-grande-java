@@ -1,4 +1,4 @@
-package com.codecool.dogmate.dto.traininglevels;
+package com.codecool.dogmate.dto.traininglevel;
 
 public record TrainingLevelDto(
 

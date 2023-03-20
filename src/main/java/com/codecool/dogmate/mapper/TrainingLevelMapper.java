@@ -1,13 +1,8 @@
 package com.codecool.dogmate.mapper;
 
-import com.codecool.dogmate.dto.traininglevels.NewTrainingLevelDto;
-import com.codecool.dogmate.dto.traininglevels.TrainingLevelDto;
-import com.codecool.dogmate.dto.users.NewUserDto;
-import com.codecool.dogmate.dto.users.UserDto;
-import com.codecool.dogmate.entity.City;
+import com.codecool.dogmate.dto.traininglevel.NewTrainingLevelDto;
+import com.codecool.dogmate.dto.traininglevel.TrainingLevelDto;
 import com.codecool.dogmate.entity.TrainingLevel;
-import com.codecool.dogmate.entity.User;
-import com.codecool.dogmate.entity.UserType;
 import org.springframework.stereotype.Component;
 
 @Component

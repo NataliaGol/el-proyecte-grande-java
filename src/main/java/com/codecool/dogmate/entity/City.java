@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.TimeZone;
 
 
@@ -41,6 +43,8 @@ public class City {
     @Column(name = "date_archive")
     private LocalDateTime date_archive ;
 
+    @OneToMany(mappedBy = "city", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private Set<AppUser> appUsers = new HashSet<>();;
 
     public City(String name) {
         this.name = name;

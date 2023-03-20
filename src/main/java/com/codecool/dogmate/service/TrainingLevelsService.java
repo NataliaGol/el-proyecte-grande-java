@@ -1,13 +1,14 @@
 package com.codecool.dogmate.service;
 
-import com.codecool.dogmate.dto.traininglevels.NewTrainingLevelDto;
-import com.codecool.dogmate.dto.traininglevels.TrainingLevelDto;
+import com.codecool.dogmate.dto.traininglevel.NewTrainingLevelDto;
+import com.codecool.dogmate.dto.traininglevel.TrainingLevelDto;
 import com.codecool.dogmate.entity.TrainingLevel;
-import com.codecool.dogmate.excpetion.UserTypeNotFoudException;
 import com.codecool.dogmate.mapper.TrainingLevelMapper;
 import com.codecool.dogmate.repository.TrainingLevelRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class TrainingLevelsService {
     public TrainingLevelDto getTrainingLevelById(Integer id) {
         return trainingLevelRepository.findOneById(id)
                 .map(trainingLevelMapper::mapEntityToTrainingLevelDto)
-                .orElseThrow(() -> new UserTypeNotFoudException(id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public TrainingLevelDto createTrainingLevel(NewTrainingLevelDto traininglevel) {

@@ -3,11 +3,12 @@ package com.codecool.dogmate.service;
 import com.codecool.dogmate.dto.animaltype.AnimalTypeDto;
 import com.codecool.dogmate.dto.animaltype.NewAnimalTypeDto;
 import com.codecool.dogmate.entity.AnimalType;
-import com.codecool.dogmate.excpetion.AnimalTypeNotFoudException;
 import com.codecool.dogmate.mapper.AnimalTypeMapper;
 import com.codecool.dogmate.repository.AnimalTypeRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 @Service
@@ -37,7 +38,7 @@ public class AnimalTypesService {
     public AnimalTypeDto getAnimalTypeById(Integer id) {
         return animalTypeRepository.findOneById(id)
                 .map(animalTypeMapper::mapEntityToAnimalTypeDto)
-                .orElseThrow(() -> new AnimalTypeNotFoudException(id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public AnimalTypeDto createAnimalType(NewAnimalTypeDto animalType) {

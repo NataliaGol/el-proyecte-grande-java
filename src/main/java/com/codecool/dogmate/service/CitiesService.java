@@ -4,13 +4,14 @@ import com.codecool.dogmate.dto.city.CityDto;
 import com.codecool.dogmate.dto.city.NewCityDto;
 import com.codecool.dogmate.entity.City;
 import com.codecool.dogmate.entity.Province;
-import com.codecool.dogmate.excpetion.CityNotFoudException;
 import com.codecool.dogmate.mapper.CityMapper;
 import com.codecool.dogmate.mapper.ProvinceMapper;
 import com.codecool.dogmate.repository.CityRepository;
 import com.codecool.dogmate.repository.ProvinceRepository;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -44,12 +45,13 @@ public class CitiesService {
     public CityDto getCityById(Integer id) {
         return cityRepository.findOneById(id)
                 .map(cityMapper::mapEntityToCityDto)
-                .orElseThrow(() -> new CityNotFoudException(id));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     public CityDto createCity(NewCityDto city) {
         City entity = cityMapper.mapNewCityDtoToEntity(city);
-        Province province = provinceRepository.findOneById(city.province()).get();
+        Province province = provinceRepository.findOneById(city.province())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         entity.setProvince(province);
         province.getCities().add(entity);
         City savedEntity = cityRepository.save(entity);

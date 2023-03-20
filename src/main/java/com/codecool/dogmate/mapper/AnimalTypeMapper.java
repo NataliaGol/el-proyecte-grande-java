@@ -22,6 +22,10 @@ public class AnimalTypeMapper {
                 entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
+                entity.getDate_create(),
+                entity.getDate_modify(),
+                entity.getDate_archive(),
+                entity.getArchive(),
                 entity.getBreeds().stream()
                         .map(breedMapper::mapEntityToBreedDto)
                         .toList()
