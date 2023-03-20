@@ -1,6 +1,7 @@
 package com.codecool.dogmate.service;
 
 import com.codecool.dogmate.dto.appuser.AppUserDto;
+import com.codecool.dogmate.dto.appuser.AppUserLoginDto;
 import com.codecool.dogmate.dto.appuser.NewAppUserDto;
 import com.codecool.dogmate.entity.*;
 import com.codecool.dogmate.mapper.AppUserMapper;
@@ -13,7 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AppUserService {
@@ -49,7 +53,7 @@ public class AppUserService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    public AppUserDto getAppUserByEmail(String email) {
+    public AppUserDto login(String email, String password) {
         return appUserRepository.findOneByEmail(email)
                 .map(appUserMapper::mapEntityToAppUserDto)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));

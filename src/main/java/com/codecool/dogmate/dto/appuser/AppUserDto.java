@@ -24,6 +24,4 @@ public record AppUserDto(
         Boolean isActive,
         List<AnimalDto> animals
 ){
-    public void setPassword(String encodedPassword) {
-    }
 }

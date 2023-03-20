@@ -1,23 +1,32 @@
 package com.codecool.dogmate.controller;
 
 import com.codecool.dogmate.dto.appuser.AppUserDto;
+import com.codecool.dogmate.dto.appuser.AppUserLoginDto;
 import com.codecool.dogmate.dto.appuser.NewAppUserDto;
 import com.codecool.dogmate.entity.AppUser;
+import com.codecool.dogmate.repository.AppUserRepository;
 import com.codecool.dogmate.service.AppUserService;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/appuser")
 public class AppUserController {
 
     private final AppUserService appUserService;
+    private final AppUserRepository appUserRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public AppUserController(AppUserService appUserService) {
+    public AppUserController(AppUserService appUserService, AppUserRepository appUserRepository, PasswordEncoder passwordEncoder) {
         this.appUserService = appUserService;
+        this.appUserRepository = appUserRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -34,11 +43,6 @@ public class AppUserController {
         return appUserService.getAppUserById(id);
     }
 
-    @GetMapping("/email/{email}")
-    public AppUserDto getAppUserByEmail(@PathVariable String email) {
-        return appUserService.getAppUserByEmail(email);
-    }
-
     @GetMapping("/name/{name}")
     public List<AppUserDto> getAppUserByName(@PathVariable String name) {
         return appUserService.getAppUserByName(name);
@@ -50,7 +54,16 @@ public class AppUserController {
         String encodedPassword = passwordEncoder.encode(newAppUserDto.password());
         newAppUserDto.setPassword(encodedPassword);
         appUserService.createAppUser(newAppUserDto);
-        return appUserService.getAppUserByEmail(newAppUserDto.email());
+        return appUserService.login(newAppUserDto.email(), newAppUserDto.password());
+    }
+
+    @PostMapping("/login")
+    public AppUserDto loginUser(@RequestBody AppUserLoginDto appUserLoginDto) {
+        Optional<AppUser> appUser = appUserRepository.findOneByEmail(appUserLoginDto.email());
+        if(appUser.isEmpty() || !passwordEncoder.matches(appUserLoginDto.password(),appUser.get().getPassword())){
+            return null;
+        }
+        return appUserService.login(appUserLoginDto.email(), appUserLoginDto.password());
     }
 
 }
