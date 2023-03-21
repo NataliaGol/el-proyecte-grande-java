@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "lesson_steps")
@@ -29,5 +31,11 @@ public class LessonStep {
     @Column(name = "description")
     @Type(type = "org.hibernate.type.TextType")
     private String description;
+
+    public LessonStep(String name, String description, Integer stepNumber) {
+        this.name = name;
+        this.description = description;
+        this.stepNumber = stepNumber;
+    }
 
 }

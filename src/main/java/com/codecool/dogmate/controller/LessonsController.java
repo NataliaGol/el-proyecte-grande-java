@@ -21,12 +21,10 @@ public class LessonsController {
     public List<LessonDto> getAllLessonsWithPageable(Pageable pageable) {
         return lessonsService.getLessons(pageable);
     }
-
     @GetMapping("/{id}")
     public LessonDto getLessonByLessonId(@PathVariable Integer id) {
         return lessonsService.getLessonById(id);
     }
-
     @PostMapping
     public LessonDto newLessons(@RequestBody NewLessonDto lesson) {
         return lessonsService.createLesson(lesson);

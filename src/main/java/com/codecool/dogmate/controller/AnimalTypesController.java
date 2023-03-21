@@ -16,20 +16,16 @@ public class AnimalTypesController {
     public AnimalTypesController(AnimalTypesService animalTypesService) {
         this.animalTypesService = animalTypesService;
     }
-
     @GetMapping
     public List<AnimalTypeDto> getAllAnimalTypes() {return animalTypesService.getAnimalType();}
-
     @GetMapping(params = {"page", "size", "sort"})
     public List<AnimalTypeDto> getAllAnimalTypesWithPageable(Pageable pageable) {
         return animalTypesService.getAnimalType(pageable);
     }
-
     @GetMapping("/{id}")
     public AnimalTypeDto getAnimalTypeByAnimalTypeId(@PathVariable Integer id) {
         return animalTypesService.getAnimalTypeById(id);
     }
-
     @PostMapping
     public AnimalTypeDto newAnimalType(@RequestBody NewAnimalTypeDto animalType) {
         return animalTypesService.createAnimalType(animalType);

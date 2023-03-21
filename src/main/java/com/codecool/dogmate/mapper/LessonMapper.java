@@ -8,6 +8,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LessonMapper {
+    private final LessonStepMapper lessonStepMapper;
+
+    public LessonMapper(LessonStepMapper lessonStepMapper) {
+        this.lessonStepMapper = lessonStepMapper;
+    }
+
 
     public Lesson mapLessonDtoToEntity(NewLessonDto dto, TrainingLevel trainingLevel) {
 
@@ -25,7 +31,11 @@ public class LessonMapper {
                 entity.getName(),
                 entity.getTrainingLevel().getId(),
                 entity.getDescription(),
-                entity.getImageLocation()
+                entity.getImageLocation(),
+                entity.getLessonSteps().stream()
+                        .map(lessonStepMapper::mapEntityToLessonStepDto)
+                        .toList()
+
         );
     }
 
